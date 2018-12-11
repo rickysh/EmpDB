@@ -26,14 +26,13 @@ void Database::addEmployee(Employee theEmployee)
     Employee emp;
     emp.setName(theEmployee.name);
     emp.setSalary(theEmployee.salary);
-    emp.setEmployeeID(theEmployee.id);
-    numOfemployees++;
+    emp.setId(theEmployee.id);
     //TODO - need to add it to array.
 
-    if(!employeeExist(E)){ //if it does not exist already, add the employee
-        if (size < numEmp) { //looks if the list is full or not
-            list[size] = E; //adds the employee to the list
-            size++; //increments the list
+    if(!getEmployee(emp.id)){ //if it does not exist already, add the employee
+        if (numOfemployees < lsize) { //looks if the list is full or not
+            list[numOfemployees] = E; //adds the employee to the list
+            numOfemployees++; //increments the list
         }
         else
         {
@@ -56,6 +55,7 @@ bool Database::removeEmployee(int idToRemove)
                     for(int j = i; j < lsize-1; j++)
                         list[j] = list[j+1]; //shifts the elements
                     numOfemployees--; //decrements the list
+                    break;
                 }
             }
         }
@@ -66,7 +66,7 @@ bool Database::removeEmployee(int idToRemove)
     Employee* Database::getEmployee(int employeeID)
     {
         for (auto& employee : list) {
-            if (employee.getEmployeeID() == employeeID)
+            if (employee.getId() == employeeID)
                 return employee;
         }
         throw runtime_error("No employee found.");
@@ -87,7 +87,6 @@ int EmployeeDB::getNumEmployee(){ //gets the number of employee in the database 
 int EmployeeDB::getActualSize(){ //returns the size
     return lsize;
 }
-
 
 DataBase::~DataBase() {
     // TODO Auto-generated destructor stub
