@@ -3,11 +3,13 @@
  *
  *      Author: serfati
  */
-
+#pragma once
 #ifndef EMPLOYEE_H_
 #define EMPLOYEE_H_
 #include <string.h>
 #include <iostream>
+
+const int DefaultStartingSalary = 0;
 
 class Employee {
 	char* name;
@@ -15,13 +17,24 @@ class Employee {
 	int   id;
 
 public:
-	Employee();
-	virtual ~Employee();
-	Employee (	char* , int , double   );
-	Employee (const Employee&);
+
+	Employee();//Default Constructor
+	virtual ~Employee();//Destructor
+	Employee (	char* , int , double   );//Constructor
+	Employee (const Employee&);//Copy Constructor
 	int planOfficeParty();
-	void print();
-	double getSalary();
+	void print() const;  //prints the employee
+
+    // GETTERS AND SETTERS
+    void setName(const char*& );
+    const char*& getName() const; //gets his name
+    void setEmployeeID(int );
+    int getEmployeeID() const; //gets his employee id
+    void setSalary(int );
+    double getSalary() const;
+
+    void promote(double raiseAmount = 1000);
+    void demote(double demeritAmount = 1000);
 };
 
 #endif /* EMPLOYEE_H_ */
