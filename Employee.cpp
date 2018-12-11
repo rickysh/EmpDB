@@ -6,12 +6,14 @@
  */
 
 #include "Employee.h"
+#include "DataBase.h"
 using namespace std;
 Employee::Employee() {
 	// TODO Auto-generated constructor stub
 	name = "";
 	salary = DefaultStartingSalary;
 	id = 0;
+	DataBase company;
 
 }
 
@@ -29,8 +31,10 @@ Employee::Employee (const Employee& emp){
 	name = new char[strlen(emp.name) + 1];
 	this->name =emp.name;
 }
-int planOfficeParty(){ // TODO
-	return 0;
+int Employee::planOfficeParty(){ // TODO
+	comp
+
+	return ;
 }
 
 void Employee::print() const
