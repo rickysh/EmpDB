@@ -57,11 +57,11 @@ double Employee::getSalary() const {
     return salary;
 }
 
-void Employee::setEmployeeID(int nId){
+void Employee::setId(int nId){
     id = nId;
 }
 
-int Employee::getEmployeeID() const {
+int Employee::getId() const {
     return id;
 }
 

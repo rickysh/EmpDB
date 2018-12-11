@@ -29,7 +29,7 @@ public:
     void setName(const char*& );
     const char*& getName() const; //gets his name
     void setEmployeeID(int );
-    int getEmployeeID() const; //gets his employee id
+    int getId() const; //gets his employee id
     void setSalary(int );
     double getSalary() const;
 
