@@ -1,6 +1,7 @@
 
 
 #include "DataBase.h"
+#include <iostream>
 using namespace std;
 
 DataBase::DataBase() {
@@ -22,24 +23,24 @@ DataBase::DataBase ( const DataBase& DB ){//copy another database
 
 
 
-void DataBase::addEmployee(Employee &theEmployee)
+void DataBase::addEmployee(Employee *&theEmployee)
 {
-	Employee emp;
-	emp.setName(theEmployee.getName());
-	emp.setSalary(theEmployee.getSalary());
-	emp.setId(theEmployee.getId());
+	Employee* emp = new Employee;
+	emp->setName(theEmployee->getName());
+	emp->setSalary(theEmployee->getSalary());
+	emp->setId(theEmployee->getId());
 	//TODO - need to add it to array.
 
-	if(!getEmployee(emp.getId())){ //if it does not exist already, add the employee
+	if(!getEmployee(emp->getId())){ //if it does not exist already, add the employee
 		if (numOfemployees < lsize) { //looks if the list is full or not
-			list[numOfemployees] = emp; //adds the employee to the list
+			list[numOfemployees] = *emp; //adds the employee to the list // TODO maybe +1
 			numOfemployees++; //increments the list
 		}
 		else
-			cout<<"You cannot add "<<emp.getName()<<" because the list is full."<<endl;
+			cout<<"You cannot add "<<emp->getName()<<" because the list is full."<<endl;
 	}
 	else
-		cout<<"The employee "<<emp.getName()<<" already exists."<<endl;
+		cout<<"The employee "<<emp->getName()<<" already exists."<<endl;
 }
 
 bool DataBase::removeEmployee(int idToRemove)
@@ -62,18 +63,22 @@ bool DataBase::removeEmployee(int idToRemove)
 }
 Employee* DataBase::getEmployee(int employeeID)
 {
-	for (auto& employee : list) {
-		if (employee.getId() == employeeID)
-			return employee;
+	Employee* e = new Employee;
+	for(int i = 0; i < lsize; i++){
+		if(list[i].getId() == e->getId())
+			return e;
 	}
 	throw runtime_error("No employee found.");
+	return NULL;
 }
+
 
 void DataBase::print() const
 {
 	if(lsize != 0)
-        for(int i = 0; i < lsize; i++){
+		for(int i = 0; i < lsize; i++){
 			list[i].print();
+		}
 	else
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
 
@@ -87,7 +92,7 @@ int DataBase::getActualSize(){ //returns the size
 
 DataBase::~DataBase() {
 	// TODO Auto-generated destructor stub
-	//for (const auto& employee : list)
-	//	employee.~Employee();
+	for(int i = 0; i < lsize; i++)
+		list[i].~Employee();
 	delete list;
 }

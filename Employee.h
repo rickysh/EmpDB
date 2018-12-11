@@ -13,7 +13,7 @@ const int DefaultStartingSalary = 0;
 
 class Employee {
 private:
-	char* name;
+	const char* name;
 	double salary;
 	int   id;
 
@@ -21,14 +21,14 @@ public:
 
 	Employee();//Default Constructor
 	virtual ~Employee();//Destructor
-	Employee (	char* , int , double   );//Constructor
+	Employee (const	char* , int , double   );//Constructor
 	Employee (const Employee&);//Copy Constructor
 	int planOfficeParty();
 	void print() const;  //prints the employee
 
 	// GETTERS AND SETTERS
-	void setName(const char*& );
-	const char*& getName() const; //gets his name
+	void setName( const char* );
+	const char* getName() const; //gets his name
 	void setId(int );
 	int getId() const; //gets his employee id
 	void setSalary(double );

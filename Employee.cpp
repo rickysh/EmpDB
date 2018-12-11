@@ -15,10 +15,10 @@ Employee::Employee() {
 
 }
 
-Employee::Employee (char* name, int id , double salary ){
+Employee::Employee (const char* name, int id , double salary ){
 	if (!name || ! salary )
 		this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	this->name = name;
 	this->salary=salary;
 	this->id=id;
 }
@@ -27,7 +27,7 @@ Employee::Employee (const Employee& emp){
 	id = emp.id;
 	salary = emp.salary;
 	name = new char[strlen(emp.name) + 1];
-	strcpy(this->name, emp.name);
+	this->name =emp.name;
 }
 int planOfficeParty(){ // TODO
 	return 0;
@@ -41,11 +41,11 @@ void Employee::print() const
 
 //GETTERS AND SETTERS
 
-void Employee::setName( const char*& nName){
-	name = nName;
+void Employee::setName( const char* nName){
+	name =  nName;
 }
 
-const char*& Employee::getName() const {
+const char* Employee::getName() const {
 	return name;
 }
 
