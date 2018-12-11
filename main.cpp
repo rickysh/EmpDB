@@ -1,6 +1,11 @@
 #include "Employee.h"
 #include "DataBase.h"
 
+#include <string.h>
+#include <iostream>
+
+using namespace std;
+
 int main() {
 
 	DataBase dataBase;
