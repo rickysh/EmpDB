@@ -11,13 +11,13 @@ DataBase::DataBase() {
 	// IN HEAP
 
 }
-DataBase::DataBase ( const DataBase& D ){//copy another database
+DataBase::DataBase ( const DataBase& DB ){//copy another database
 	//copy everything
-	list = new Employee[D.lsize];
-	this->numOfemployees = D.numOfemployees;
-	this->lsize = D.lsize;
-	for(int i = 0; i < D.lsize; i++)
-		list[i] = D.list[i]; //copies all the employees inside the other list
+	list = new Employee[DB.lsize];
+	this->numOfemployees = DB.numOfemployees;
+	this->lsize = DB.lsize;
+	for(int i = 0; i < DB.lsize; i++)
+		list[i] = DB.list[i]; //copies all the employees inside the other list
 }
 
 
@@ -72,8 +72,8 @@ Employee* DataBase::getEmployee(int employeeID)
 void DataBase::print() const
 {
 	if(lsize != 0)
-		for (const auto& employee : list)
-			employee.print();
+        for(int i = 0; i < lsize; i++){
+			list[i].print();
 	else
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
 
@@ -87,7 +87,7 @@ int DataBase::getActualSize(){ //returns the size
 
 DataBase::~DataBase() {
 	// TODO Auto-generated destructor stub
-	for (const auto& employee : list)
-		employee.~Employee();
+	//for (const auto& employee : list)
+	//	employee.~Employee();
 	delete list;
 }

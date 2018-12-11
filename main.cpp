@@ -9,10 +9,16 @@ using namespace std;
 int main() {
 
 	DataBase dataBase;
-	dataBase.addEmployee(new Employee((char*)"Sharon",11,10000));
-	dataBase.addEmployee(new Employee((char*)"Yael",11,11000));
-	dataBase.addEmployee(new Employee((char*)"Yael",12,20000));
-	dataBase.addEmployee(new Employee((char*)"Barak",10,11000));
+	Employee s = new Employee((char*)"Sharon",11,10000);
+	Employee y = new Employee((char*)"Yael",11,11000);
+	Employee a = new Employee((char*)"Yael",12,20000);
+	Employee b = new Employee((char*)"Barak",10,11000);
+
+
+	dataBase.addEmployee(s);
+	dataBase.addEmployee(y);
+	dataBase.addEmployee(a);
+	dataBase.addEmployee(b);
 	dataBase.print();
 	dataBase.removeEmployee(1);
 	dataBase.removeEmployee(11);
