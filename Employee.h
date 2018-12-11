@@ -12,6 +12,7 @@
 const int DefaultStartingSalary = 0;
 
 class Employee {
+private:
 	char* name;
 	double salary;
 	int   id;
@@ -25,16 +26,18 @@ public:
 	int planOfficeParty();
 	void print() const;  //prints the employee
 
-    // GETTERS AND SETTERS
-    void setName(const char*& );
-    const char*& getName() const; //gets his name
-    void setEmployeeID(int );
-    int getId() const; //gets his employee id
-    void setSalary(int );
-    double getSalary() const;
+	// GETTERS AND SETTERS
+	void setName(const char*& );
+	const char*& getName() const; //gets his name
+	void setId(int );
+	int getId() const; //gets his employee id
+	void setSalary(double );
+	double getSalary() const;
 
-    void promote(double raiseAmount = 1000);
-    void demote(double demeritAmount = 1000);
+	void promote(double raiseAmount = 1000);
+	void demote(double demeritAmount = 1000);
+
+
 };
 
 #endif /* EMPLOYEE_H_ */

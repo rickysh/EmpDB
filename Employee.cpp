@@ -17,10 +17,10 @@ Employee::Employee() {
 
 Employee::Employee (char* name, int id , double salary ){
 	if (!name || ! salary )
-       this->name = new char[strlen(name) + 1];
-   strcpy(this->name, name);
-   this->salary=salary;
-   this->id=id;
+		this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
+	this->salary=salary;
+	this->id=id;
 }
 
 Employee::Employee (const Employee& emp){
@@ -36,45 +36,45 @@ int planOfficeParty(){ // TODO
 void Employee::print() const
 {
 	cout << "name:" << name << "\n" << "ID:" << id
- << "\n" << "Salary:" << salary <<"\n"<< endl;
+			<< "\n" << "Salary:" << salary <<"\n"<< endl;
 }
 
 //GETTERS AND SETTERS
 
-void Employee::setName(const char*& nName){
-    name = nName;
+void Employee::setName( const char*& nName){
+	name = nName;
 }
 
 const char*& Employee::getName() const {
-    return name;
+	return name;
 }
 
 void Employee::setSalary(double newSalary) {
-    salary = newSalary;
+	salary = newSalary;
 }
 
 double Employee::getSalary() const {
-    return salary;
+	return salary;
 }
 
 void Employee::setId(int nId){
-    id = nId;
+	id = nId;
 }
 
 int Employee::getId() const {
-    return id;
+	return id;
 }
 
 void Employee::promote(double raiseAmount){
-    setSalary(getSalary() + raiseAmount);
+	setSalary(getSalary() + raiseAmount);
 }
 
 void Employee::demote(double demeritAmount){
-    setSalary(getSalary() - demeritAmount);
+	setSalary(getSalary() - demeritAmount);
 }
 
 
 Employee::~Employee() {
-    // TODO Auto-generated destructor stub
-    delete[] name;
+	// TODO Auto-generated destructor stub
+	delete[] name;
 }
