@@ -10,43 +10,44 @@
 using namespace std;
 Employee::Employee() {
 	// TODO Auto-generated constructor stub
-	name = "";
+	this->name = new char[strlen("Name") + 1];
+	name = (char*)"Name";
 	salary = DefaultStartingSalary;
 	id = 0;
-	DataBase company;
-
+	empCounter++;
 }
 
 Employee::Employee (const char* name, int id , double salary ){
-	if (!name || ! salary )
-		this->name = new char[strlen(name) + 1];
-	this->name = name;
+
+	if(!name ) return;
+	this->name = new char[strlen(name) + 1];
+	strcpy(this->name, name);
 	this->salary=salary;
 	this->id=id;
+	empCounter++;
 }
 
 Employee::Employee (const Employee& emp){
 	id = emp.id;
 	salary = emp.salary;
 	name = new char[strlen(emp.name) + 1];
-	this->name =emp.name;
+	strcpy(this->name, emp.name);
 }
 int Employee::planOfficeParty(){ // TODO
-	comp
-
-	return ;
+	return empCounter*10;
 }
 
 void Employee::print() const
 {
 	cout << "name:" << name << "\n" << "ID:" << id
-			<< "\n" << "Salary:" << salary <<"\n"<< endl;
+   << "\n" << "Salary:" << salary <<"\n"<< endl;
 }
 
 //GETTERS AND SETTERS
 
 void Employee::setName( const char* nName){
-	name =  nName;
+	this->name = new char[strlen(nName) + 1];
+	strcpy(this->name, nName);
 }
 
 const char* Employee::getName() const {
@@ -77,8 +78,34 @@ void Employee::demote(double demeritAmount){
 	setSalary(getSalary() - demeritAmount);
 }
 
-
 Employee::~Employee() {
 	// TODO Auto-generated destructor stub
 	delete[] name;
+	empCounter--;
 }
+
+Employee& Employee::operator++()
+{
+	this->promote(100);
+    return *this;
+}
+Employee Employee::operator++(int o)
+{
+        Employee tmp(*this); // copy
+        operator++(); // pre-increment
+        return tmp;   // return old value
+    }
+Employee& Employee:: operator+=(const Employee& rhs){
+
+}
+
+friend inline bool Employee::operator==(const Employee& lhs, const Employee& rhs){
+	return false;
+}
+//Employee& Employee::operator=(const Employee& other){
+//    this->id = other.id;
+//    this->salary = other.salary;
+//    this->name = new char[strlen(other.name) + 1];
+//    strcpy(this->name, other.name);
+//    return *this;
+//}
