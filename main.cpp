@@ -31,9 +31,9 @@ int main() {
 		dataBase.addEmployee(yael);
 		dataBase.addEmployee(barak);
 		dataBase.print();
-	//	dataBase.removeEmployee(1);
-	//	dataBase.removeEmployee(10);
-	//	dataBase.print();
+		//dataBase.removeEmployee(1);
+		dataBase.removeEmployee(10);
+		dataBase.print();
 
 	//	Employee *b = dataBase.getEmployee(12);
 	//	Employee *y = dataBase.getEmployee(10);
