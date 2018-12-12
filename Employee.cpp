@@ -3,14 +3,13 @@
 #include "Employee.h"
 using namespace std;
 
-int Employee::empCounter = 1;
+int Employee::empCounter = 0;
 
 
 Employee::Employee() {
     setName("Name");
 	salary = startingSalary;
 	id = 0;
-	empCounter++;
 }
 
 Employee::Employee (const char* name, int id , double salary ){

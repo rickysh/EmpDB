@@ -6,7 +6,7 @@ using namespace std;
 
 DataBase::DataBase() {
 	numOfemployees = 0;
-	arrLen = 3;
+	arrLen = 10;
 	list = new Employee[arrLen]; // data is an array need to build array with size 3
 }
 DataBase::DataBase ( int numOfemployees, Employee* otherList ){
@@ -32,9 +32,9 @@ bool DataBase::addEmployee(Employee *theEmployee)
 {
 	//TODO - need to add it to array.
 
-	if(!getEmployee(theEmployee->getId())){ //if it does not exist already, add the employee
+	if(getEmployee(theEmployee->getId()) == NULL){ //if it does not exist already, add the employee
 		if (numOfemployees < arrLen) { //looks if the list is full or not
-			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
+			list[numOfemployees] = *theEmployee; //adds the employee to the list
 			numOfemployees++; //increments the list
 			return true;
 		}
@@ -43,7 +43,7 @@ bool DataBase::addEmployee(Employee *theEmployee)
 			Employee* temp = new Employee[arrLen]; // Allocate new, bigger array.
 			for (int i=0; i<arrLen; i++)
 				temp[i] = list[i];       // Copy old array to new array.
-			delete [] list;              // Free old array memory.
+			//delete [] list;              // Free old array memory.
 			list = temp;                 // Now a points to new array.
 			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
 			numOfemployees++; //increments the list
@@ -74,20 +74,21 @@ bool DataBase::removeEmployee(int idToRemove)
 }
 Employee* DataBase::getEmployee(int employeeID)
 {
-	for(int i = 0; i < arrLen; i++){
-		if(list[i].getId() == employeeID)
-			return &list[i];
+	for(int i = 0; i < numOfemployees; i++){
+		if(strcmp(list[i].getName(), "Name") != 0)
+			if(list[i].getId() == employeeID )
+				return &list[i];
 	}
 	return NULL;
 }
 
 void DataBase::print() const
 {
-
 	if(numOfemployees > 0){
 		cout<<"Employees batabase:\n"<<endl;
 		for(int i = 0; i < numOfemployees;  i++)
-			list[i].print();
+			if(strcmp(list[i].getName(), "Name") != 0)
+				list[i].print();
 	}
 	else
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
