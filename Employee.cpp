@@ -1,18 +1,14 @@
-/*
- * Employee.cpp
- *
- *  Created on: Dec 10, 2018
- *      Author: serfati
- */
+
 
 #include "Employee.h"
-#include "DataBase.h"
 using namespace std;
+
+int Employee::empCounter = 1;
+
+
 Employee::Employee() {
-	// TODO Auto-generated constructor stub
-	this->name = new char[strlen("Name") + 1];
-	name = (char*)"Name";
-	salary = DefaultStartingSalary;
+    setName("Name");
+	salary = startingSalary;
 	id = 0;
 	empCounter++;
 }
@@ -32,15 +28,17 @@ Employee::Employee (const Employee& emp){
 	salary = emp.salary;
 	name = new char[strlen(emp.name) + 1];
 	strcpy(this->name, emp.name);
+	empCounter++;
 }
-int Employee::planOfficeParty(){ // TODO
+
+int Employee::planOfficeParty(){
 	return empCounter*10;
 }
 
 void Employee::print() const
 {
 	cout << "name:" << name << "\n" << "ID:" << id
-   << "\n" << "Salary:" << salary <<"\n"<< endl;
+			<< "\n" << "Salary:" << salary << endl;
 }
 
 //GETTERS AND SETTERS
@@ -74,38 +72,40 @@ void Employee::promote(double raiseAmount){
 	setSalary(getSalary() + raiseAmount);
 }
 
-void Employee::demote(double demeritAmount){
-	setSalary(getSalary() - demeritAmount);
-}
-
 Employee::~Employee() {
-	// TODO Auto-generated destructor stub
 	delete[] name;
 	empCounter--;
 }
 
-Employee& Employee::operator++()
-{
-	this->promote(100);
+Employee Employee::operator+ (const Employee& e) {
+    double d = e.salary;
+	this->promote(d);
     return *this;
 }
-Employee Employee::operator++(int o)
-{
-        Employee tmp(*this); // copy
-        operator++(); // pre-increment
-        return tmp;   // return old value
-    }
-Employee& Employee:: operator+=(const Employee& rhs){
-
+Employee& Employee::operator++(){
+    this->promote(100);
+    return *this;
+}
+Employee Employee::operator++(int){
+    Employee tmp (*this);
+    ++(*this);
+    return tmp;
 }
 
-friend inline bool Employee::operator==(const Employee& lhs, const Employee& rhs){
-	return false;
+Employee& Employee::operator+=(const Employee& e){
+	strcat(name, e.name);
+    return *this;
 }
-//Employee& Employee::operator=(const Employee& other){
-//    this->id = other.id;
-//    this->salary = other.salary;
-//    this->name = new char[strlen(other.name) + 1];
-//    strcpy(this->name, other.name);
-//    return *this;
-//}
+
+Employee& Employee::operator=(const Employee& e){
+   this->id = e.id;
+   this->salary = e.salary;
+   this->name = new char[strlen(e.name) + 1];
+   setName(e.name);
+   return *this;
+}
+
+ostream& operator<<(ostream& out, const Employee& e) {e.print(); return out;};
+bool operator>(const Employee& l, const Employee& r){
+	return l.salary > r.salary;};
+inline bool Employee::operator==(const Employee& e)const {return (id == e.id);};

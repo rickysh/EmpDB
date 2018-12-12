@@ -1,17 +1,15 @@
-
-
-#include "DataBase.h"
+#include "Employee.h"
+#include <string.h>
 #include <iostream>
+#include "DataBase.h"
 using namespace std;
 
 DataBase::DataBase() {
-	// TODO Auto-generated constructor stub
 	numOfemployees = 0;
 	lsize = 3;
 	list = new Employee[lsize]; // data is an array need to build array with size 3
-	// IN HEAP
-
 }
+
 DataBase::DataBase ( const DataBase& DB ){//copy another database
 	//copy everything
 	list = new Employee[DB.lsize];
@@ -20,8 +18,6 @@ DataBase::DataBase ( const DataBase& DB ){//copy another database
 	for(int i = 0; i < DB.lsize; i++)
 		list[i] = DB.list[i]; //copies all the employees inside the other list
 }
-
-
 
 void DataBase::addEmployee(Employee *&theEmployee)
 {
@@ -63,15 +59,13 @@ bool DataBase::removeEmployee(int idToRemove)
 }
 Employee* DataBase::getEmployee(int employeeID)
 {
-	Employee* e = new Employee;
 	for(int i = 0; i < lsize; i++){
-		if(list[i].getId() == e->getId())
-			return e;
+		if(list[i].getId() == employeeID)
+			return &list[i];
 	}
 	throw runtime_error("No employee found.");
 	return NULL;
 }
-
 
 void DataBase::print() const
 {
@@ -83,10 +77,12 @@ void DataBase::print() const
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
 
 }
+
 int DataBase::getNumEmployee(){ //gets the number of employee in the database company
 	return numOfemployees;
 }
-int DataBase::getActualSize(){ //returns the size
+
+int DataBase::getArraySize(){ //returns the size
 	return lsize;
 }
 

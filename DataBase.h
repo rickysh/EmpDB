@@ -1,17 +1,13 @@
-/*
- * dataBase.h
- *
- *  Created on: Dec 10, 2018
- *      Author: serfati
- */
+
 #ifndef DATABASE_H_
 #define DATABASE_H_
+
 #include "Employee.h"
 #include <string.h>
 #include <iostream>
 
-
 class DataBase {
+private:
 	int numOfemployees;//number of Employees DB
 	Employee *list; //array of employee list
 	int lsize; //size of list
@@ -28,7 +24,7 @@ public:
 	Employee* getEmployee (int);//gets the info of an employee by their id
 
 	int getNumEmployee(); //gets the number of Employees in list
-	int getActualSize(); //gets the actual size of the list
+	int getArraySize(); //gets the actual size of the list
 
 	virtual ~DataBase();//destructor
 };
