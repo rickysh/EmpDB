@@ -18,7 +18,7 @@ public:
 	DataBase ( int , Employee* );//constructor
 	DataBase ( const DataBase&  );//copy constructor
 
-	void addEmployee ( Employee*&);//function to insert an employee into database
+	void addEmployee ( Employee*);//function to insert an employee into database
 	void print()const; //prints the employee list
 	bool removeEmployee(int); //function to delete an employee into database
 	Employee* getEmployee (int);//gets the info of an employee by their id

@@ -38,7 +38,7 @@ int Employee::planOfficeParty(){
 void Employee::print() const
 {
 	cout << "name:" << name << "\n" << "ID:" << id
-			<< "\n" << "Salary:" << salary << endl;
+			<< "\n" << "Salary:" << salary << "\n" << endl;
 }
 
 //GETTERS AND SETTERS

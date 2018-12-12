@@ -19,24 +19,20 @@ DataBase::DataBase ( const DataBase& DB ){//copy another database
 		list[i] = DB.list[i]; //copies all the employees inside the other list
 }
 
-void DataBase::addEmployee(Employee *&theEmployee)
+void DataBase::addEmployee(Employee *theEmployee)
 {
-	Employee* emp = new Employee;
-	emp->setName(theEmployee->getName());
-	emp->setSalary(theEmployee->getSalary());
-	emp->setId(theEmployee->getId());
 	//TODO - need to add it to array.
 
-	if(!getEmployee(emp->getId())){ //if it does not exist already, add the employee
+	if(true){ //if it does not exist already, add the employee
 		if (numOfemployees < lsize) { //looks if the list is full or not
-			list[numOfemployees] = *emp; //adds the employee to the list // TODO maybe +1
+			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
 			numOfemployees++; //increments the list
 		}
-		else
-			cout<<"You cannot add "<<emp->getName()<<" because the list is full."<<endl;
+		else //TODO double the size of list!
+			cout<<"You cannot add "<<theEmployee->getName()<<" because the list is full."<<endl;
 	}
 	else
-		cout<<"The employee "<<emp->getName()<<" already exists."<<endl;
+		cout<<"The employee "<<theEmployee->getName()<<" already exists."<<endl;
 }
 
 bool DataBase::removeEmployee(int idToRemove)
@@ -70,9 +66,9 @@ Employee* DataBase::getEmployee(int employeeID)
 void DataBase::print() const
 {
 	if(lsize != 0)
-		for(int i = 0; i < lsize; i++){
+		for(int i = 0; i < lsize-1; i++)
 			list[i].print();
-		}
+
 	else
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
 
