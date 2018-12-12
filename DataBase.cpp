@@ -32,24 +32,33 @@ bool DataBase::addEmployee(Employee *theEmployee)
 {
 	//TODO - need to add it to array.
 
-	if(true){ //if it does not exist already, add the employee
+	if(!getEmployee(theEmployee->getId())){ //if it does not exist already, add the employee
 		if (numOfemployees < arrLen) { //looks if the list is full or not
 			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
 			numOfemployees++; //increments the list
 			return true;
 		}
-		else //TODO double the size of list!
-			cout<<"You cannot add "<<theEmployee->getName()<<" because the list is full."<<endl;
+		else{ //TODO double the size of list! // array is full
+			arrLen = arrLen * 2;            // Double the previous size.
+			Employee* temp = new Employee[arrLen]; // Allocate new, bigger array.
+			for (int i=0; i<arrLen; i++)
+				temp[i] = list[i];       // Copy old array to new array.
+			delete [] list;              // Free old array memory.
+			list = temp;                 // Now a points to new array.
+			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
+			numOfemployees++; //increments the list
+			return true;
+		}
 	}
 	else
-		cout<<"The employee "<<theEmployee->getName()<<" already exists."<<endl;
+		cout<<"already exist"<<endl;
 	return false;
 }
 
 bool DataBase::removeEmployee(int idToRemove)
 {
 	Employee* E = getEmployee(idToRemove);
-	if(E && arrLen != 0){ //if it exist, delete it, looks if the list is empty or not
+	if(E != NULL && arrLen != 0){ //if it exist, delete it, looks if the list is empty or not
 		for(int i = 0; i < arrLen; i++){
 			if(list[i].getId() == E->getId()){
 				list[i].~Employee();
@@ -60,8 +69,6 @@ bool DataBase::removeEmployee(int idToRemove)
 			}
 		}
 	}
-	else
-		cout<<"The employee "<<E->getName()<<" does not exist."<<endl;
 
 	return false;
 }
@@ -71,16 +78,17 @@ Employee* DataBase::getEmployee(int employeeID)
 		if(list[i].getId() == employeeID)
 			return &list[i];
 	}
-	throw runtime_error("No employee found.");
 	return NULL;
 }
 
 void DataBase::print() const
 {
-	if(arrLen != 0)
-		for(int i = 0; i < arrLen-1; i++)
-			list[i].print();
 
+	if(numOfemployees > 0){
+		cout<<"Employees batabase:\n"<<endl;
+		for(int i = 0; i < numOfemployees;  i++)
+			list[i].print();
+	}
 	else
 		cout<<"Cannot print the list of employees because it is empty."<<endl;
 
@@ -95,7 +103,7 @@ int DataBase::getArrayLength(){ //returns the size
 }
 
 DataBase::~DataBase() {
-	// TODO Auto-generated destructor stub
+	// destructor stub
 	for(int i = 0; i < arrLen; i++)
 		list[i].~Employee();
 	delete list;
