@@ -43,8 +43,9 @@ bool DataBase::addEmployee(Employee *theEmployee)
 			Employee* temp = new Employee[arrLen]; // Allocate new, bigger array.
 			for (int i=0; i<arrLen; i++)
 				temp[i] = list[i];       // Copy old array to new array.
-			//delete [] list;              // Free old array memory.
-			list = temp;                 // Now a points to new array.
+			//			for(int i = 0; i < arrLen; i++)
+			//				list[i].~Employee();            // Free old array memory.
+			this->list = temp;                 // Now a points to new array.
 			list[numOfemployees] = *theEmployee; //adds the employee to the list // TODO maybe +1
 			numOfemployees++; //increments the list
 			return true;
@@ -69,7 +70,6 @@ bool DataBase::removeEmployee(int idToRemove)
 			}
 		}
 	}
-
 	return false;
 }
 Employee* DataBase::getEmployee(int employeeID)
@@ -107,5 +107,5 @@ DataBase::~DataBase() {
 	// destructor stub
 	for(int i = 0; i < arrLen; i++)
 		list[i].~Employee();
-	delete list;
+	delete [] list;
 }

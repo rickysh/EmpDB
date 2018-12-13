@@ -14,7 +14,7 @@ private:
 	int   id;
 
 public:
-    static int empCounter ;
+	static int empCounter ;
 	Employee();//Default Constructor
 
 	Employee ( const char* , int , double );//Constructor
@@ -23,7 +23,7 @@ public:
 	void print() const;  //prints the employee
 
 	// GETTERS AND SETTERS
-	void setName( const char* );
+	bool setName( const char* );
 	const char* getName() const; //gets his name
 	void setId( int );
 	int getId() const; //gets his employee id
@@ -31,16 +31,16 @@ public:
 	double getSalary() const;
 	void promote( double raiseAmount);
 
-    //OPERATORS
-    Employee operator+ ( const Employee& e) ;
-    Employee& operator++();
-    Employee operator++( int);
-    friend  bool operator>( const Employee& l, const Employee& r);
-    inline bool operator==( const Employee& e)const ;
-    Employee& operator+=( const Employee& e);
-    Employee& operator=( const Employee& e);
-    friend ostream& operator<<( ostream& out, const Employee& e);
+	//OPERATORS
+	Employee operator+ ( const Employee& e) ;
+	Employee& operator++();
+	Employee operator++( int);
+	friend  bool operator>( const Employee& l, const Employee& r);
+	inline bool operator==( const Employee& e)const ;
+	Employee& operator+=( const Employee& e);
+	Employee& operator=( const Employee& e);
+	friend ostream& operator<<( ostream& out, const Employee& e);
 
-    virtual ~Employee();//Destructor
+	virtual ~Employee();//Destructor
 };
 #endif /* EMPLOYEE_H_ */

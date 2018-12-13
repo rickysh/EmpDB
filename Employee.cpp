@@ -7,16 +7,15 @@ int Employee::empCounter = 0;
 
 
 Employee::Employee() {
-    setName("Name");
+	setName((char*)"Name");
 	salary = startingSalary;
 	id = 0;
 }
 
 Employee::Employee (const char* name, int id , double salary ){
 
-	if(!name ) return;
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
+	if(!name)return;
+	setName(name);
 	this->salary=salary;
 	this->id=id;
 	empCounter++;
@@ -25,8 +24,7 @@ Employee::Employee (const char* name, int id , double salary ){
 Employee::Employee (const Employee& emp){
 	id = emp.id;
 	salary = emp.salary;
-	name = new char[strlen(emp.name) + 1];
-	strcpy(this->name, emp.name);
+	setName(emp.name);
 	empCounter++;
 }
 
@@ -42,9 +40,17 @@ void Employee::print() const
 
 //GETTERS AND SETTERS
 
-void Employee::setName( const char* nName){
-	this->name = new char[strlen(nName) + 1];
-	strcpy(this->name, nName);
+bool Employee::setName( const char* nName){
+	if (!nName)
+		return false;
+	char* temp;
+	temp = new char[strlen(nName) + 1];
+	if (!temp)
+		return false;
+	strcpy(temp, nName);
+	//delete[]name;
+	this->name = temp;
+	return true;
 }
 
 const char* Employee::getName() const {
@@ -67,44 +73,42 @@ int Employee::getId() const {
 	return id;
 }
 
-void Employee::promote(double raiseAmount){
+void Employee::promote(double raiseAmount=100){
 	setSalary(getSalary() + raiseAmount);
 }
 
 Employee::~Employee() {
-	delete[] name;
+	delete [] name;
 	empCounter--;
 }
 
 Employee Employee::operator+ (const Employee& e) {
-    double d = e.salary;
+	double d = e.salary;
 	this->promote(d);
-    return *this;
+	return *this;
 }
 Employee& Employee::operator++(){
-    this->promote(100);
-    return *this;
+	this->promote();
+	return *this;
 }
 Employee Employee::operator++(int){
-    Employee tmp (*this);
-    ++(*this);
-    return tmp;
+	Employee tmp (*this);
+	++(*this);
+	return tmp;
 }
 
 Employee& Employee::operator+=(const Employee& e){
 	strcat(name, e.name);
-    return *this;
+	return *this;
 }
 
 Employee& Employee::operator=(const Employee& e){
-   this->id = e.id;
-   this->salary = e.salary;
-   this->name = new char[strlen(e.name) + 1];
-   setName(e.name);
-   return *this;
+	this->id = e.id;
+	this->salary = e.salary;
+	setName(e.name);
+	return *this;
 }
 
-ostream& operator<<(ostream& out, const Employee& e) {e.print(); return out;};
-bool operator>(const Employee& l, const Employee& r){
-	return l.salary > r.salary;};
+ostream& operator<<(ostream& out, const Employee& e) { e.print(); return out;};
+bool operator>(const Employee& l, const Employee& r){return l.salary > r.salary;};
 inline bool Employee::operator==(const Employee& e)const {return (id == e.id);};
