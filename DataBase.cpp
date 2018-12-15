@@ -2,15 +2,18 @@
 #include <string.h>
 #include <iostream>
 #include "DataBase.h"
+
 using namespace std;
 
-DataBase::DataBase() {
+
+DataBase::DataBase() { // default constructor
 	numOfemployees = 0;
 	arrLen = 10;
 	list = new Employee[arrLen]; // data is an array need to build array with size 3
 }
+
 DataBase::DataBase ( int numOfemployees, Employee* otherList ){
-	//TODO not good enougth
+	//TODO not good enough
 	this->numOfemployees = numOfemployees;
 	arrLen = 10;
 	for(int i = 0; i < arrLen; i++)
@@ -28,8 +31,7 @@ DataBase::DataBase ( const DataBase& DB ){//copy another database
 		list[i] = DB.list[i]; //copies all the employees inside the other list
 }
 
-bool DataBase::addEmployee(Employee *theEmployee)
-{
+bool DataBase::addEmployee(Employee *theEmployee){
 	//TODO - need to add it to array.
 
 	if(getEmployee(theEmployee->getId()) == NULL){ //if it does not exist already, add the employee
@@ -52,12 +54,11 @@ bool DataBase::addEmployee(Employee *theEmployee)
 		}
 	}
 	else
-		cout<<"already exist"<<endl;
+		cout<<"This employee is already in the database\n"<<endl;
 	return false;
 }
 
-bool DataBase::removeEmployee(int idToRemove)
-{
+bool DataBase::removeEmployee(int idToRemove){
 	Employee* E = getEmployee(idToRemove);
 	if(E != NULL && arrLen != 0){ //if it exist, delete it, looks if the list is empty or not
 		for(int i = 0; i < arrLen; i++){
@@ -70,10 +71,11 @@ bool DataBase::removeEmployee(int idToRemove)
 			}
 		}
 	}
+	cout<<"The employee isn't in the database\n"<<endl;
 	return false;
 }
-Employee* DataBase::getEmployee(int employeeID)
-{
+
+Employee* DataBase::getEmployee(int employeeID){
 	for(int i = 0; i < numOfemployees; i++){
 		if(strcmp(list[i].getName(), "Name") != 0)
 			if(list[i].getId() == employeeID )
@@ -82,10 +84,9 @@ Employee* DataBase::getEmployee(int employeeID)
 	return NULL;
 }
 
-void DataBase::print() const
-{
+void DataBase::print() const{
 	if(numOfemployees > 0){
-		cout<<"Employees batabase:\n"<<endl;
+		cout<<"Employees database:\n"<<endl;
 		for(int i = 0; i < numOfemployees;  i++)
 			if(strcmp(list[i].getName(), "Name") != 0)
 				list[i].print();
@@ -107,5 +108,4 @@ DataBase::~DataBase() {
 	// destructor stub
 	for(int i = 0; i < arrLen; i++)
 		list[i].~Employee();
-	delete [] list;
 }

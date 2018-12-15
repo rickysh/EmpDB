@@ -3,7 +3,10 @@
 #define EMPLOYEE_H_
 #include <string.h>
 #include <iostream>
+
+
 using namespace std;
+
 const int startingSalary = 0;
 
 
